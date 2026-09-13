@@ -16,5 +16,7 @@ license.txt
 # Local/generated files
 node_modules/
 dist/
+out/
+.next/
 .DS_Store
 *.log
