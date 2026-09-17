@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en"><head><script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('azzan-theme');if(t==='light')document.documentElement.dataset.theme='light'}catch(e){}` }} /></head><body>{children}</body></html>;
 }

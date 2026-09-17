@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import posts from '../../src/content/posts.json';
+import ThemeToggle from '../components/theme-toggle';
 
 type Post = (typeof posts)[number];
 type Params = { slug?: string[] };
@@ -17,7 +18,7 @@ export function generateStaticParams() {
 }
 
 function Header() {
-  return <header className="site-header"><Link className="logo" href="/"><span className="logo-mark">AK</span><span>Azzan Khan</span></Link><nav className="desktop-nav" aria-label="Primary navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}</nav><Link className="button button-small button-dark header-cta" href="/contact">Let&apos;s talk {arrow}</Link><details className="mobile-menu"><summary aria-label="Open menu">Menu</summary><nav aria-label="Mobile navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}<Link href="/contact">Let&apos;s talk {arrow}</Link></nav></details></header>;
+  return <header className="site-header"><Link className="logo" href="/"><span className="logo-mark">AK</span><span>Azzan Khan</span></Link><nav className="desktop-nav" aria-label="Primary navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}</nav><div className="header-actions"><ThemeToggle /><Link className="button button-small button-dark header-cta" href="/contact">Let&apos;s talk {arrow}</Link></div><details className="mobile-menu"><summary aria-label="Open menu">Menu</summary><nav aria-label="Mobile navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}<Link href="/contact">Let&apos;s talk {arrow}</Link><ThemeToggle /></nav></details></header>;
 }
 
 function Footer() {
