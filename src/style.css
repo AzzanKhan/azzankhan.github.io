@@ -56,4 +56,9 @@ html[data-theme="light"] .video-banner{background:var(--ink);border-color:var(--
 html[data-theme="light"] .mobile-menu nav{background:var(--cream);border-color:var(--line)}
 html[data-theme="light"] .mobile-menu nav a{color:var(--ink)}
 html[data-theme="light"] .theme-toggle{border-color:var(--line)}
+html[data-theme="light"] .about-facts strong,html[data-theme="light"] .article-content{color:var(--ink)}
+html[data-theme="light"] .article-content pre{color:#d8e6df}
+html[data-theme="light"] .youtube-panel{color:#fff}
+html[data-theme="light"] .youtube-panel h2,html[data-theme="light"] .video-banner h2{color:#fff}
+html[data-theme="light"] .youtube-panel .eyebrow,html[data-theme="light"] .video-banner .eyebrow{color:#9eaaa4}
 @media(max-width:800px){.header-actions{display:none}.mobile-menu nav .theme-toggle{margin-top:6px}}
