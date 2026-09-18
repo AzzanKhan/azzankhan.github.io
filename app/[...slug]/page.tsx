@@ -8,7 +8,7 @@ type Params = { slug?: string[] };
 
 const arrow = <span aria-hidden="true">↗</span>;
 const dot = <span className="eyebrow-dot" aria-hidden="true" />;
-const navItems = [['Work', '/work'], ['Services', '/services'], ['Writing', '/blog'], ['About', '/about']];
+const navItems = [['Work', '/work'], ['Services', '/services'], ['Writing', '/blog'], ['About', '/about'], ['Contact', '/contact']];
 
 export function generateStaticParams() {
   return [
