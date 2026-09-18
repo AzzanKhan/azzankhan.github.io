@@ -1,15 +1,25 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 
 const arrow = <span aria-hidden="true">↗</span>;
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const iframeLoaded = useRef(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    setSubmitting(true);
+  }
+
+  function handleFrameLoad() {
+    if (!iframeLoaded.current) {
+      iframeLoaded.current = true;
+      return;
+    }
+    setSubmitting(false);
     setSubmitted(true);
-    event.currentTarget.reset();
   }
 
   if (submitted) {
@@ -32,9 +42,9 @@ export default function ContactForm() {
         <label>Name<input name="name" required autoComplete="name" /></label>
         <label>Email<input type="email" name="email" required autoComplete="email" /></label>
         <label>What can I help with?<textarea name="message" rows={6} required /></label>
-        <button className="button button-dark" type="submit">Send inquiry {arrow}</button>
+        <button className="button button-dark" type="submit" disabled={submitting}>{submitting ? 'Sending…' : <>Send inquiry {arrow}</>}</button>
       </form>
-      <iframe name="contact-submit-frame" title="Contact form submission" className="contact-submit-frame" />
+      <iframe name="contact-submit-frame" title="Contact form submission" className="contact-submit-frame" onLoad={handleFrameLoad} />
     </>
   );
 }
