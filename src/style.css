@@ -66,3 +66,79 @@ html[data-theme="light"] .youtube-panel .eyebrow,html[data-theme="light"] .video
 html[data-theme="light"] .contact-form{background:var(--cream)}html[data-theme="light"] .contact-form input,html[data-theme="light"] .contact-form textarea{background:#fff}
 @media(max-width:800px){.contact-layout{grid-template-columns:1fr;gap:42px;padding:0 20px;margin-bottom:75px}.contact-form{padding:25px 20px}.contact-copy h2{font-size:48px}}
 @media(max-width:800px){.header-actions{display:none}.mobile-menu nav .theme-toggle{margin-top:6px}}
+
+/* Final mobile pass: this comes after the desktop visual layer so it wins the cascade. */
+@media(max-width:800px){
+  html,body{overflow-x:hidden}
+  .site-header{height:70px;padding:0 20px}
+  .logo{font-size:14px}
+  .logo-mark{width:31px;height:31px}
+  .mobile-menu nav{top:25px;right:-2px;width:min(250px,calc(100vw - 40px))}
+  .hero{display:block;min-height:0;padding:58px 20px 82px}
+  .hero h1,.page-intro h1{font-size:clamp(48px,14vw,76px);line-height:.94;max-width:100%;overflow-wrap:normal}
+  .hero-lead{font-size:16px;line-height:1.65}
+  .hero-actions{align-items:flex-start;flex-direction:column;gap:20px}
+  .hero-status{max-width:280px;line-height:1.8}
+  .hero-visual{height:350px;margin-top:42px;width:calc(100% - 10px)}
+  .code-card{left:7%;top:24%;padding:23px 21px;font-size:11px;max-width:86%;overflow:auto}
+  .code-label{font-size:8px}
+  .hero-note{font-size:10px;right:18px;bottom:20px}
+  .hero-coordinate{font-size:7px;right:17px;top:19px}
+  .signal-bar{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:0;padding:21px 20px}
+  .signal-bar div{min-width:0;display:block}
+  .signal-bar strong,.signal-bar span{display:block}
+  .signal-bar strong{font-size:23px;margin-bottom:4px}
+  .signal-bar span{font-size:9px;line-height:1.45}
+  .signal-stack{grid-column:1/-1;display:flex!important;flex-wrap:wrap;gap:7px!important}
+  .signal-stack span{display:inline-block}
+  .section{padding:72px 20px}
+  .section-heading{margin-bottom:34px}
+  .section-heading h2,.video-banner h2,.cta-section h2,.split-callout h2{font-size:clamp(38px,11vw,56px)}
+  .work-grid,.post-grid,.project-feature,.about-grid,.project-notes,.career-grid{display:grid;grid-template-columns:1fr;gap:28px}
+  .work-card-large .work-card-art,.work-card-art{height:310px}
+  .work-card-caption{gap:16px;align-items:flex-start;line-height:1.4}
+  .proof-note{display:block;margin-top:40px}
+  .proof-note p{font-size:21px;margin-top:14px}
+  .post-image{height:190px}
+  .video-banner{display:block;margin:0;padding:62px 20px}
+  .video-banner .button{margin-top:24px}
+  .cta-section{padding:72px 20px 82px}
+  .page-intro{padding:64px 20px 48px}
+  .lead{font-size:16px}
+  .work-list,.service-list,.about-grid,.contact-panel,.youtube-panel,.project-notes{padding-left:20px;padding-right:20px}
+  .project-feature{gap:28px;margin-bottom:62px}
+  .project-reverse .project-art{order:0}
+  .project-art{height:310px;padding:25px}
+  .project-copy h2{font-size:40px}
+  .service-item{grid-template-columns:38px 1fr 18px;gap:15px;padding:24px 0}
+  .service-item h2{font-size:25px}
+  .service-item p{font-size:14px}
+  .split-callout{margin:0 20px 72px;padding:35px 25px}
+  .blog-toolbar{padding:0 20px;margin-bottom:24px;gap:15px;line-height:1.5}
+  .post-grid-all{padding-bottom:75px}
+  .article{padding:48px 20px 75px}
+  .article-header{margin:48px auto 32px}
+  .article-header h1{font-size:clamp(40px,11vw,64px);overflow-wrap:anywhere}
+  .article-excerpt{font-size:16px}
+  .article-image{max-height:300px;margin-bottom:42px}
+  .article-layout{display:grid;grid-template-columns:1fr;gap:38px}
+  .article-layout aside{order:-1}
+  .article-content{font-size:15px;overflow-wrap:anywhere}
+  .article-content pre{max-width:100%;font-size:10px}
+  .about-photo{max-width:100%}
+  .about-statement{font-size:25px}
+  .about-facts div{display:block}
+  .about-facts strong{display:block;text-align:left;margin-top:8px}
+  .career-section{padding:0 20px 75px}
+  .career-section h2{font-size:clamp(38px,11vw,56px)}
+  .contact-layout{display:grid;grid-template-columns:1fr;gap:42px;padding:0 20px;margin-bottom:75px}
+  .contact-copy h2{font-size:48px}
+  .contact-form,.contact-success{padding:25px 20px}
+  .contact-form .button,.contact-success .button{width:100%;justify-content:center}
+  .youtube-panel{margin:0 20px 75px;padding:40px 25px;display:block;min-height:0}
+  .youtube-panel h2{font-size:42px}
+  .play-button{width:100px;height:100px;font-size:25px;margin-bottom:35px}
+  .site-footer{padding:35px 20px;display:block}
+  .footer-links{margin-top:28px;display:flex;flex-wrap:wrap;gap:15px}
+  .copyright{text-align:left;margin-top:30px}
+}
