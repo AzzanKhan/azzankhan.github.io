@@ -1,26 +1,15 @@
 'use client';
 
-import { FormEvent, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const arrow = <span aria-hidden="true">↗</span>;
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const iframeLoaded = useRef(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    setSubmitting(true);
-  }
-
-  function handleFrameLoad() {
-    if (!iframeLoaded.current) {
-      iframeLoaded.current = true;
-      return;
-    }
-    setSubmitting(false);
-    setSubmitted(true);
-  }
+  useEffect(() => {
+    setSubmitted(new URLSearchParams(window.location.search).get('sent') === 'true');
+  }, []);
 
   if (submitted) {
     return (
@@ -36,15 +25,15 @@ export default function ContactForm() {
 
   return (
     <>
-      <form className="contact-form" action="https://formsubmit.co/azzankhanofficial@gmail.com" method="POST" target="contact-submit-frame" onSubmit={handleSubmit}>
+      <form className="contact-form" action="https://formsubmit.co/azzankhanofficial@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="[Azzan Khan Website] New inquiry" />
+        <input type="hidden" name="_next" value="https://azzankhan.github.io/contact?sent=true" />
         <input type="hidden" name="_captcha" value="false" />
         <label>Name<input name="name" required autoComplete="name" /></label>
         <label>Email<input type="email" name="email" required autoComplete="email" /></label>
         <label>What can I help with?<textarea name="message" rows={6} required /></label>
-        <button className="button button-dark" type="submit" disabled={submitting}>{submitting ? 'Sending…' : <>Send inquiry {arrow}</>}</button>
+        <button className="button button-dark" type="submit">Send inquiry {arrow}</button>
       </form>
-      <iframe name="contact-submit-frame" title="Contact form submission" className="contact-submit-frame" onLoad={handleFrameLoad} />
     </>
   );
 }
