@@ -75,7 +75,7 @@ html[data-theme="light"] .contact-form{background:var(--cream)}html[data-theme="
   .logo-mark{width:31px;height:31px}
   .site-header .desktop-nav{display:none}
   .mobile-menu{display:block;position:relative}
-  .mobile-menu summary{display:flex;align-items:center;gap:8px;list-style:none;font:500 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+  .mobile-menu summary{display:flex;align-items:center;justify-content:center;width:30px;height:30px;list-style:none;font-size:0;cursor:pointer}
   .mobile-menu summary::-webkit-details-marker{display:none}
   .mobile-menu summary:before{content:'☰';font:18px/1 Arial,sans-serif}
   .mobile-menu[open] summary:before{content:'×';font-size:23px}
