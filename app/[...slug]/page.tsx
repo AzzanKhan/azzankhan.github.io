@@ -8,11 +8,11 @@ type Params = { slug?: string[] };
 
 const arrow = <span aria-hidden="true">↗</span>;
 const dot = <span className="eyebrow-dot" aria-hidden="true" />;
-const navItems = [['Work', '/work'], ['Services', '/services'], ['Writing', '/blog'], ['About', '/about'], ['Contact', '/contact']];
+const navItems = [['Work', '/work'], ['Skills', '/skills'], ['Writing', '/blog'], ['About', '/about'], ['Contact', '/contact']];
 
 export function generateStaticParams() {
   return [
-    { slug: ['work'] }, { slug: ['services'] }, { slug: ['projects'] },
+    { slug: ['work'] }, { slug: ['skills'] }, { slug: ['services'] }, { slug: ['projects'] },
     { slug: ['blog'] }, { slug: ['about'] }, { slug: ['contact'] }, { slug: ['youtube'] },
     ...posts.map((post) => ({ slug: ['blog', post.slug] })),
   ];
@@ -62,14 +62,14 @@ function WorkPage() {
   return <Shell><Intro kicker="Selected work" title={<>Proof over<br /><em>promises.</em></>} copy="View of product problems, responsibilities, and delivery environments from my time associated with CitiusTech and Infosys." /><section className="case-study-grid">{projects.map(({ title, client, dates, tag, copy, capabilities, url }, index) => <article className="case-study" key={title}><span className="case-number">0{index + 1}</span><p className="eyebrow">{tag}</p><h2>{title}</h2><p className="case-client">{client}</p><p className="case-dates">{dates}</p><p className="case-description">{copy}</p><p className="case-capabilities"><span>Technical capabilities</span>{capabilities}</p>{url && <a className="case-link" href={url} target="_blank" rel="noreferrer">View public organisation site {arrow}</a>}</article>)}</section><section className="split-callout"><p className="eyebrow">How I contribute</p><h2>From first<br /><em>diagram to delivery.</em></h2><p>I translate product requirements into maintainable systems, build across the stack, integrate APIs and data, and support cloud delivery and team execution.</p></section></Shell>;
 }
 
-function ServicesPage() {
-  const services = [
-    ['01', 'Product engineering', 'End-to-end web product development across user experience, APIs, data, integrations, and production delivery.'],
-    ['02', 'Platform and API work', 'Service design, REST API development, integrations, data flows, and backend improvements for growing products.'],
-    ['03', 'Cloud delivery', 'Practical delivery across cloud infrastructure, CI/CD, environment setup, release workflows, and operational quality.'],
-    ['04', 'Engineering enablement', 'Code quality, testing, performance, documentation, AI-assisted workflows, and repeatable practices that help teams move well.'],
+function SkillsPage() {
+  const groups = [
+    ['01', 'Application engineering', 'Modern web application development', 'Frontend architecture · Component systems · Responsive interfaces · Accessibility · TypeScript · JavaScript'],
+    ['02', 'Backend and integration', 'APIs, services, and data', 'Node.js · REST APIs · Service integrations · SQL · MongoDB · Data modeling'],
+    ['03', 'Cloud and delivery', 'Reliable releases and production systems', 'AWS · Lambda · EC2 · S3 · Step Functions · Azure DevOps · CI/CD · Git'],
+    ['04', 'Quality and collaboration', 'Maintainable engineering practices', 'Automated testing · Code review · Agile delivery · Technical design · AI-assisted development'],
   ];
-  return <Shell><Intro kicker="Capabilities" title={<>Useful skills,<br /><em>carefully applied.</em></>} copy="An informational view of the capabilities I bring to product teams and engineering environments." /><section className="service-list">{services.map(([number, title, copy]) => <div className="service-item" key={number}><span className="service-number">{number}</span><div><h2>{title}</h2><p>{copy}</p></div><span className="service-arrow" aria-hidden="true">↗</span></div>)}</section></Shell>;
+  return <Shell><Intro kicker="Technical skills" title={<>A broad toolkit,<br /><em>built through delivery.</em></>} copy="Engineering capabilities developed through enterprise healthcare, learning, AI-assisted, ecommerce, and cloud programmes." /><section className="skills-grid">{groups.map(([number, title, subtitle, skills]) => <article className="skill-card" key={number}><span className="skill-number">{number}</span><p className="eyebrow">{subtitle}</p><h2>{title}</h2><p className="skill-list">{skills}</p></article>)}</section></Shell>;
 }
 
 function ProjectsPage() {
@@ -79,7 +79,8 @@ function ProjectsPage() {
 function StandardPage({ kind }: { kind: string }) {
   const content: Record<string, { kicker: string; title: React.ReactNode; copy: string }> = {
     work: { kicker: 'Selected work', title: <>Thoughtful work,<br /><em>built to matter.</em></>, copy: 'A selection of projects and product experiences where engineering, clarity, and a little stubbornness came together.' },
-    services: { kicker: 'Services', title: <>Good work is a<br /><em>team sport.</em></>, copy: 'I partner with founders, teams, and thoughtful organisations to turn ambitious ideas into dependable software.' },
+    skills: { kicker: 'Technical skills', title: <>A broad toolkit,<br /><em>built through delivery.</em></>, copy: 'Engineering capabilities developed through enterprise healthcare, learning, AI-assisted, ecommerce, and cloud programmes.' },
+    services: { kicker: 'Technical skills', title: <>A broad toolkit,<br /><em>built through delivery.</em></>, copy: 'Engineering capabilities developed through enterprise healthcare, learning, AI-assisted, ecommerce, and cloud programmes.' },
     projects: { kicker: 'Projects', title: <>Small experiments,<br /><em>serious curiosity.</em></>, copy: 'A living shelf of things I’m building, exploring, or learning from.' },
     about: { kicker: 'About Azzan', title: <>Engineer by trade.<br /><em>Builder by nature.</em></>, copy: 'I like useful things, honest conversations, and the moment a messy problem becomes a simple next step.' },
     contact: { kicker: 'Contact', title: <>Have a problem worth<br /><em>solving?</em></>, copy: 'Tell me what you’re working on, where you’re stuck, or what you want to make better. I’ll get back to you with a thoughtful next step.' },
@@ -87,7 +88,7 @@ function StandardPage({ kind }: { kind: string }) {
   };
   const item = content[kind] ?? content.work;
   if (kind === 'work') return <WorkPage />;
-  if (kind === 'services') return <ServicesPage />;
+  if (kind === 'skills' || kind === 'services') return <SkillsPage />;
   if (kind === 'projects') return <ProjectsPage />;
   if (kind === 'about') return <Shell><Intro {...item} /><section className="about-grid"><div className="about-statement"><img className="about-photo" src="/media/azzan-profile.jpg" alt="Azzan Khan" /><p>I&apos;m a Lead Engineer and full-stack developer with 7+ years of experience building enterprise-grade web applications across healthcare, learning, AI-assisted workflows, and ecommerce.</p><p>I work across modern web platforms, APIs, cloud infrastructure, data systems, and delivery practices. I enjoy turning complex product requirements into clear, maintainable software, and I use AI-assisted development to accelerate the work while keeping engineering judgment in the loop.</p></div><div className="about-facts"><div><span>Current role</span><strong>Lead Engineer<br />CitiusTech · Apr 2024 — present</strong></div><div><span>Prior role</span><strong>Senior Software Engineer<br />CitiusTech · Jan 2022 — Mar 2024</strong></div><div><span>Earlier</span><strong>Systems Engineer → Senior Systems Engineer<br />Infosys · Jan 2019 — Jan 2022</strong></div><div><span>Technical range</span><strong>Modern web platforms · APIs<br />Cloud · SQL · MongoDB · CI/CD</strong></div><div><span>Recognition</span><strong>Key Contributor Award · 2023<br />Digital Ninja Award · 2021<br /><small>Associated with CitiusTech / Infosys</small></strong></div></div></section><section className="career-section"><p className="eyebrow">{dot}Professional journey</p><h2>Experience across<br /><em>high-stakes products.</em></h2><div className="career-grid"><div><strong>CitiusTech</strong><span>Lead Engineer · Apr 2024 — present<br />Senior Software Engineer · Jan 2022 — Mar 2024</span><p>Enterprise healthcare and learning products, contributing across architecture, full-stack development, APIs, data, cloud delivery, CI/CD, and production quality.</p></div><div><strong>Infosys</strong><span>Senior Systems Engineer · Jan 2021 — Jan 2022<br />Systems Engineer · Jun 2019 — Dec 2020<br />Trainee · Jan 2019 — May 2019</span><p>Enterprise ecommerce and cloud modernization work, delivering modular product experiences, API integrations, and AWS-backed workflows.</p></div></div></section></Shell>;
   if (kind === 'contact') return <Shell><Intro {...item} /><section className="contact-layout"><div className="contact-copy"><p className="eyebrow">Direct line</p><h2>Start with a<br /><em>good question.</em></h2><p>You can reach me at this address: <strong>azzankhanofficial@gmail.com</strong></p><a className="text-link" href="https://www.linkedin.com/in/azzan-khan-871958114/" target="_blank" rel="noreferrer">Connect on LinkedIn {arrow}</a></div><ContactForm /></section></Shell>;

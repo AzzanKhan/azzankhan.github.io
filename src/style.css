@@ -162,3 +162,21 @@ html[data-theme="light"] .case-study .case-link{color:#13221f}
   .footer-links{margin-top:28px;display:flex;flex-wrap:wrap;gap:15px}
   .copyright{text-align:left;margin-top:30px}
 }
+
+.skills-grid{max-width:1176px;margin:0 auto;padding:0 32px 110px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.skill-card{background:var(--cream);border:1px solid var(--line);padding:28px;min-height:235px}
+.skill-number{font:12px var(--mono);color:var(--accent)}
+.skill-card .eyebrow{margin-top:24px}
+.skill-card h2{font-size:27px;line-height:1.12;letter-spacing:-.055em;margin:12px 0}
+.skill-list{color:var(--muted);font-size:14px;line-height:1.8;margin:0}
+html[data-theme="light"] .proof-note p{color:#253b33}
+html[data-theme="light"] .proof-note .eyebrow,
+html[data-theme="light"] .about-facts span,
+html[data-theme="light"] .career-grid span,
+html[data-theme="light"] .skill-number{color:#455b37}
+html[data-theme="light"] .about-facts strong,
+html[data-theme="light"] .career-grid strong{color:#13221f}
+html[data-theme="light"] .career-grid p,
+html[data-theme="light"] .skill-list{color:#465750}
+html[data-theme="light"] .about-facts small{color:#4f5e58}
+@media(max-width:800px){.skills-grid{grid-template-columns:1fr;padding:0 20px 75px}.skill-card{min-height:0;padding:24px}}
