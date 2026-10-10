@@ -23,7 +23,7 @@ function Header() {
 }
 
 function Footer() {
-  return <footer className="site-footer"><div><Link className="logo" href="/"><span className="logo-mark">AK</span><span>Azzan Khan</span></Link><p className="muted">Lead Full-Stack Engineer · Specification-driven · AI-native</p></div><div className="footer-links"><Link href="/blog">Writing {arrow}</Link><a href="https://www.youtube.com/@azzankhanofficial" target="_blank" rel="noreferrer">YouTube {arrow}</a><a href="https://www.linkedin.com/in/azzan-khan-871958114/" target="_blank" rel="noreferrer">LinkedIn {arrow}</a><a href="https://github.com/azzankhan" target="_blank" rel="noreferrer">GitHub {arrow}</a><Link href="/contact">Contact {arrow}</Link></div><p className="copyright">© {new Date().getFullYear()} Azzan Khan · Built with Next.js and AI-assisted development.</p></footer>;
+  return <footer className="site-footer"><div><Link className="logo" href="/"><span className="logo-mark">AK</span><span>Azzan Khan</span></Link><p className="muted">Lead Full-Stack Engineer · Specification-driven · AI-native</p></div><div className="footer-links"><Link href="/blog">Blog {arrow}</Link><a href="https://www.youtube.com/@azzankhanofficial" target="_blank" rel="noreferrer">YouTube {arrow}</a><a href="https://www.linkedin.com/in/azzan-khan-871958114/" target="_blank" rel="noreferrer">LinkedIn {arrow}</a><a href="https://github.com/azzankhan" target="_blank" rel="noreferrer">GitHub {arrow}</a><Link href="/contact">Contact {arrow}</Link></div><p className="copyright">© {new Date().getFullYear()} Azzan Khan · Built with Next.js and AI-assisted development.</p></footer>;
 }
 
 function Shell({ children }: { children: React.ReactNode }) {
