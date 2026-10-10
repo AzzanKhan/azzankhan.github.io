@@ -8,7 +8,7 @@ type Params = { slug?: string[] };
 
 const arrow = <span aria-hidden="true">↗</span>;
 const dot = <span className="eyebrow-dot" aria-hidden="true" />;
-const navItems = [['Work', '/work'], ['Skills', '/skills'], ['Writing', '/blog'], ['About', '/about']];
+const navItems = [['Work', '/work'], ['Skills', '/skills'], ['About', '/about']];
 
 export function generateStaticParams() {
   return [
@@ -23,7 +23,7 @@ function Header() {
 }
 
 function Footer() {
-  return <footer className="site-footer"><div><Link className="logo" href="/"><span className="logo-mark">AK</span><span>Azzan Khan</span></Link><p className="muted">Lead Full-Stack Engineer · Specification-driven · AI-native</p></div><div className="footer-links"><a href="https://www.youtube.com/@azzankhanofficial" target="_blank" rel="noreferrer">YouTube {arrow}</a><a href="https://www.linkedin.com/in/azzan-khan-871958114/" target="_blank" rel="noreferrer">LinkedIn {arrow}</a><a href="https://github.com/azzankhan" target="_blank" rel="noreferrer">GitHub {arrow}</a><Link href="/contact">Contact {arrow}</Link></div><p className="copyright">© {new Date().getFullYear()} Azzan Khan · Built with Next.js and AI-assisted development.</p></footer>;
+  return <footer className="site-footer"><div><Link className="logo" href="/"><span className="logo-mark">AK</span><span>Azzan Khan</span></Link><p className="muted">Lead Full-Stack Engineer · Specification-driven · AI-native</p></div><div className="footer-links"><Link href="/blog">Writing {arrow}</Link><a href="https://www.youtube.com/@azzankhanofficial" target="_blank" rel="noreferrer">YouTube {arrow}</a><a href="https://www.linkedin.com/in/azzan-khan-871958114/" target="_blank" rel="noreferrer">LinkedIn {arrow}</a><a href="https://github.com/azzankhan" target="_blank" rel="noreferrer">GitHub {arrow}</a><Link href="/contact">Contact {arrow}</Link></div><p className="copyright">© {new Date().getFullYear()} Azzan Khan · Built with Next.js and AI-assisted development.</p></footer>;
 }
 
 function Shell({ children }: { children: React.ReactNode }) {
@@ -37,15 +37,6 @@ function Intro({ kicker, title, copy }: { kicker: string; title: React.ReactNode
 function PostCard({ post }: { post: Post }) {
   return <article className="post-card"><Link href={`/blog/${post.slug}`} className="post-image"><img src={post.image.replace('./', '/')} alt="" loading="lazy" /></Link><div className="post-card-body"><div className="post-meta"><span>{post.category}</span></div><h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3><p>{post.excerpt}</p><Link className="text-link" href={`/blog/${post.slug}`}>Read article {arrow}</Link></div></article>;
 }
-
-const howSteps = [
-  ['01', 'Understand', 'Understand the actual problem — the users, the constraints, and the outcome that matters.'],
-  ['02', 'Specify', 'Turn ambiguous requirements into explicit specifications, acceptance criteria, and technical decisions.'],
-  ['03', 'Architect', 'Define APIs, data flows, system boundaries, authentication, infrastructure, and trade-offs.'],
-  ['04', 'Build with AI', 'Use coding agents extensively for implementation, refactoring, tests, debugging, and documentation.'],
-  ['05', 'Validate', 'Review what the agents produce — behaviour, security, edge cases, and architectural correctness.'],
-  ['06', 'Ship', 'Deploy through CI/CD to cloud infrastructure, and take responsibility for the production result.'],
-];
 
 const featuredWork = [
   {
@@ -71,16 +62,23 @@ const featuredWork = [
   },
 ];
 
-const featuredPostSlugs = ['jwt-authentication-in-nodejs', 'deploying-nodejs-application-on-aws-ec2'];
+const featuredQuests = [
+  {
+    tag: 'Education · Independent delivery',
+    title: 'Garden Public School',
+    copy: 'A live website for a school, delivered quickly with AI-assisted development.',
+    url: 'https://www.gardenpublicschool.in/',
+    label: 'Visit the site',
+  },
+];
 
 export function Home() {
-  const featuredPosts = featuredPostSlugs.map((slug) => posts.find((post) => post.slug === slug)).filter((post): post is Post => Boolean(post));
   return <Shell>
     <section className="hero">
       <div className="hero-copy">
         <p className="eyebrow">{dot}Lead Full-Stack Engineer · AI-native builder · India</p>
         <h1>I turn complex ideas into <em>production software.</em></h1>
-        <p className="hero-lead">I take products from specification to production — across healthcare, learning, and enterprise platforms — using specification-driven, AI-native engineering. AI coding agents accelerate the parts machines do well. The engineering decisions stay human-owned.</p>
+        <p className="hero-lead">Across healthcare, learning, and enterprise platforms, I take products from specification to production, with every engineering decision kept human-owned.</p>
         <div className="hero-actions"><Link className="button button-dark" href="/work">View my work {arrow}</Link><Link className="text-link" href="/#how-i-build">Read how I build {arrow}</Link></div>
         <div className="hero-status"><span className="status-pulse" />Open to thoughtful collaborations <span>·</span> based in India</div>
       </div>
@@ -91,17 +89,10 @@ export function Home() {
       <div><strong>5</strong><span>enterprise clients · Elsevier, GSK, GE, Roche, bpost</span></div>
       <div><strong>2</strong><span>awards · Key Contributor / Digital Ninja</span></div>
     </section>
-    <section className="section how-section" id="how-i-build">
-      <div className="section-heading">
-        <div><p className="eyebrow">{dot}The process</p><h2>How I build <em>software.</em></h2></div>
-        <p className="how-flow">Problem → Specification → Architecture → AI-assisted implementation → Validation → Deployment → Production</p>
-      </div>
-      <div className="how-grid">{howSteps.map(([number, title, copy]) => <div className="how-step" key={number}><span className="step-number">{number}</span><h3>{title}</h3><p>{copy}</p></div>)}</div>
-    </section>
-    <section className="sdd-band">
-      <p className="eyebrow">{dot}Specification over prompts</p>
-      <h2>AI writes code fast. <em>Knowing what it should write is the job.</em></h2>
-      <p className="sdd-copy">AI can produce code extremely quickly. The harder problem is telling it what the software should actually do. My approach is specification-driven: define the problem, constraints, expected behaviour, and acceptance criteria first — then let AI agents execute against that specification, with human review on every change.</p>
+    <section className="sdd-band" id="how-i-build">
+      <p className="eyebrow">{dot}How I build</p>
+      <h2>Specify first. <em>Let agents execute.</em></h2>
+      <p className="sdd-copy">AI can write code extremely quickly. The harder problem is telling it what the software should do. I define the problem, constraints, expected behaviour, and acceptance criteria first, then let agents execute against them, with human review on every change.</p>
       <p className="sdd-flow">Requirements → Specification → Agent → Code → Tests → Review</p>
     </section>
     <section className="section">
@@ -112,6 +103,12 @@ export function Home() {
       <div className="story-grid">{featuredWork.map(({ tag, title, problem, outcome, tech }, index) => <article className="story-card" key={title}><span className="case-number">0{index + 1}</span><p className="eyebrow">{tag}</p><h3>{title}</h3><div className="story-line"><span>Problem</span><p>{problem}</p></div><div className="story-line"><span>Outcome</span><p>{outcome}</p></div><p className="story-tech">{tech}</p></article>)}</div>
       
     </section>
+    <section className="section side-quests">
+      <div className="section-heading">
+        <div><p className="eyebrow">{dot}Small builds, independent projects, and experiments</p><h2>Side <em>quests.</em></h2></div>
+      </div>
+      <div className="quest-grid">{featuredQuests.map(({ tag, title, copy, url, label }) => <a className="quest-card" key={title} href={url} target="_blank" rel="noreferrer"><p className="eyebrow">{tag}</p><h3>{title}</h3><p>{copy}</p><span className="quest-link">{label} {arrow}</span></a>)}</div>
+    </section>
     <section className="section now-section">
       <div className="section-heading">
         <div><p className="eyebrow">{dot}Now</p><h2>Where the craft<br /><em>is heading.</em></h2></div>
@@ -121,22 +118,6 @@ export function Home() {
         <div className="now-chips"><span>Specification-driven development</span><span>Coding agents</span><span>Agentic workflows</span><span>AI-assisted testing</span><span>Automated documentation</span><span>Generative UI workflows</span><span>Developer education</span></div>
       </div>
       
-    </section>
-    <section className="section writing-section">
-      <div className="section-heading">
-        <div><p className="eyebrow">{dot}Engineering notes</p><h2>How things<br /><em>actually work.</em></h2></div>
-        <Link className="text-link" href="/blog">Browse all writing {arrow}</Link>
-      </div>
-      <div className="post-grid post-grid-home">{featuredPosts.map((post) => <PostCard key={post.slug} post={post} />)}</div>
-    </section>
-    <section className="video-banner">
-      <div>
-        <p className="eyebrow">YouTube · most watched</p>
-        <h2>How technology<br /><em>actually works.</em></h2>
-        <p>Practical videos on engineering, architecture, and the lessons hiding in the work.</p>
-        <a className="text-link video-channel-link" href="https://www.youtube.com/@azzankhanofficial" target="_blank" rel="noreferrer">More on YouTube {arrow}</a>
-      </div>
-      <div className="video-embed"><iframe src="https://www.youtube.com/embed/edXbZee_A4A" title="Using AWS EC2 to Deploy NodeJS and MongoDB Application" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
     </section>
     <section className="cta-section">
       <p className="eyebrow">{dot}Have a good problem?</p>

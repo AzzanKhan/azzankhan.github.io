@@ -361,3 +361,26 @@ html[data-theme="light"] .case-study:hover{border-color:#607d18}
 
 .form-note{margin:-6px 0 0;font:10px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
 
+
+/* ── Side quests: smaller, quieter cards for secondary projects ── */
+.side-quests{padding-top:20px}
+
+.quest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+
+.quest-card{display:block;border:1px dashed var(--line);padding:18px 20px;transition:border-color .2s,transform .2s}
+
+.quest-card:hover{border-color:var(--lime);transform:translateY(-2px)}
+
+.quest-card .eyebrow{font-size:9px}
+
+.quest-card h3{font-size:18px;line-height:1.2;letter-spacing:-.04em;margin:12px 0 8px}
+
+.quest-card>p:not(.eyebrow){font-size:13px;color:var(--muted);line-height:1.6;margin:0}
+
+.quest-link{display:inline-block;margin-top:14px;font:10px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink)}
+
+.quest-card:hover .quest-link{color:var(--lime)}
+
+html[data-theme="light"] .quest-card:hover{border-color:#607d18}
+
+html[data-theme="light"] .quest-card:hover .quest-link{color:#607d18}
