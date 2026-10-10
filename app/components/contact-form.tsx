@@ -24,16 +24,16 @@ export default function ContactForm() {
   }
 
   return (
-    <>
-      <form className="contact-form" action="https://formsubmit.co/azzankhanofficial@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="[Azzan Khan Website] New inquiry" />
-        <input type="hidden" name="_next" value="https://azzankhan.github.io/contact?sent=true" />
-        <input type="hidden" name="_captcha" value="false" />
-        <label>Name<input name="name" required autoComplete="name" /></label>
-        <label>Email<input type="email" name="email" required autoComplete="email" /></label>
-        <label>What can I help with?<textarea name="message" rows={6} required /></label>
-        <button className="button button-dark" type="submit">Send inquiry {arrow}</button>
-      </form>
-    </>
+    <form className="contact-form" action="https://formsubmit.co/azzankhanofficial@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="[Azzan Khan Website] New inquiry" />
+      <input type="hidden" name="_next" value="https://azzankhan.github.io/contact?sent=true" />
+      <input type="hidden" name="_captcha" value="false" />
+      <label>Name<input name="name" required autoComplete="name" /></label>
+      <label>Email<input type="email" name="email" required autoComplete="email" /></label>
+      <label>Subject<input name="subject" placeholder="A few words on what it's about" /></label>
+      <label>Message<textarea name="message" rows={6} required /></label>
+      <button className="button button-dark" type="submit">Send message {arrow}</button>
+      <p className="form-note">I read every message myself.</p>
+    </form>
   );
 }
