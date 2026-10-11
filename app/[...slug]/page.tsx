@@ -10,11 +10,12 @@ type Params = { slug?: string[] };
 
 const arrow = <span aria-hidden="true">↗</span>;
 const dot = <span className="eyebrow-dot" aria-hidden="true" />;
-const navItems = [['Work', '/work'], ['Services', '/services'], ['About', '/about'], ['Contact', '/contact']];
+const navItems = [['What I build', '/what-i-build'], ['Work', '/work'], ['About', '/about'], ['Contact', '/contact']];
 
 const pageMeta: Record<string, { title: string; description: string }> = {
   work: { title: 'Selected work', description: 'Enterprise case studies in healthcare, learning, AI, and commerce: the problems, the engineering decisions, and the production outcomes.' },
-  services: { title: 'Services', description: 'Business websites, custom web applications, AI integration and automation, and website modernization by Azzan Khan.' },
+  'what-i-build': { title: 'What I build', description: 'Business websites, full-stack applications, AI integrations and automation, and application modernization.' },
+  services: { title: 'What I build', description: 'Business websites, full-stack applications, AI integrations and automation, and application modernization.' },
   projects: { title: 'Projects', description: 'Small builds, experiments, and independent projects, including Garden Public School.' },
   about: { title: 'About', description: 'Azzan Khan: a Lead Full-Stack Engineer with 7+ years across healthcare, learning, enterprise, and cloud platforms.' },
   blog: { title: 'Writing', description: 'Practical notes on JavaScript, APIs, authentication, Docker, and cloud deployment by Azzan Khan.' },
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       };
     }
   }
-  const key = slug[0] ?? '';
+  const key = slug[0] === 'services' ? 'what-i-build' : (slug[0] ?? '');
   const meta = pageMeta[key];
   if (!meta) return {};
   return {
@@ -49,18 +50,43 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export function generateStaticParams() {
   return [
-    { slug: ['work'] }, { slug: ['services'] }, { slug: ['projects'] },
+    { slug: ['work'] }, { slug: ['what-i-build'] }, { slug: ['services'] }, { slug: ['projects'] },
     { slug: ['blog'] }, { slug: ['about'] }, { slug: ['contact'] }, { slug: ['youtube'] },
     ...posts.map((post) => ({ slug: ['blog', post.slug] })),
   ];
 }
 
 function Header() {
-  return <header className="site-header"><Link className="logo" href="/"><span className="logo-mark">AK</span><span>Azzan Khan</span></Link><nav className="desktop-nav" aria-label="Primary navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}</nav><div className="header-actions"><ThemeToggle /></div><details className="mobile-menu"><summary aria-label="Open navigation"></summary><nav aria-label="Mobile navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}<ThemeToggle /></nav></details></header>;
+  return <header className="site-header"><Link className="logo" href="/"><img className="logo-mark" src="/media/new-icon-dark.png" alt="" /><span>Azzan Khan</span></Link><nav className="desktop-nav" aria-label="Primary navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}</nav><div className="header-actions"><ThemeToggle /></div><details className="mobile-menu"><summary aria-label="Open navigation"></summary><nav aria-label="Mobile navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}<ThemeToggle /></nav></details></header>;
 }
 
 function Footer() {
-  return <footer className="site-footer"><div><Link className="logo" href="/"><span className="logo-mark">AK</span><span>Azzan Khan</span></Link><p className="muted">Lead Full-Stack Engineer · Specification-driven · AI-native</p></div><div className="footer-links"><Link href="/work">Work</Link><Link href="/services">Services</Link><Link href="/blog">Writing</Link><a href="https://www.youtube.com/@azzankhanofficial" target="_blank" rel="noreferrer">YouTube {arrow}</a><a href="https://www.linkedin.com/in/azzan-khan-871958114/" target="_blank" rel="noreferrer">LinkedIn {arrow}</a><a href="https://github.com/azzankhan" target="_blank" rel="noreferrer">GitHub {arrow}</a></div><p className="copyright">© {new Date().getFullYear()} Azzan Khan · Built with Next.js and AI-assisted development.</p></footer>;
+  return <footer className="site-footer">
+    <div className="footer-brand">
+      <Link className="logo" href="/"><img className="logo-mark" src="/media/new-icon-dark.png" alt="" /><span>Azzan Khan</span></Link>
+      <p>Lead Engineer building thoughtful, production-ready software.</p>
+      <div className="footer-socials" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/azzan-khan-871958114/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43c-1.14 0-2.06-.92-2.06-2.06s.92-2.06 2.06-2.06S7.4 4.23 7.4 5.37s-.92 2.06-2.06 2.06zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.78C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.78 24h20.43c.99 0 1.79-.77 1.79-1.72V1.72C24 .77 23.2 0 22.22 0z" /></svg>
+        </a>
+        <a href="https://github.com/azzankhan" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.577v-2.234c-3.338.726-4.043-1.416-4.043-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 6.004 0c2.29-1.552 3.296-1.23 3.296-1.23.655 1.653.243 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.815 1.103.815 2.222v3.293c0 .32.216.694.825.576A12 12 0 0 0 12 .297z" /></svg>
+        </a>
+        <a href="https://www.youtube.com/@azzankhanofficial" target="_blank" rel="noreferrer" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.6 12 3.6 12 3.6s-7.6 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.8.5 9.4.5 9.4.5s7.6 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z" /></svg>
+        </a>
+      </div>
+    </div>
+    <nav className="footer-column" aria-label="Footer navigation">
+      <h2>Navigate</h2>
+      <Link href="/">Home</Link><Link href="/what-i-build">What I build</Link><Link href="/work">Work</Link><Link href="/about">About</Link><Link href="/contact">Contact</Link>
+    </nav>
+    <nav className="footer-column" aria-label="Resources">
+      <h2>Explore</h2>
+      <Link href="/blog">Writing</Link><Link href="/projects">Projects</Link><Link href="/youtube">YouTube</Link><a href="https://github.com/azzankhan" target="_blank" rel="noreferrer">GitHub</a><a href="https://www.linkedin.com/in/azzan-khan-871958114/" target="_blank" rel="noreferrer">LinkedIn</a>
+    </nav>
+    <p className="copyright">© {new Date().getFullYear()} Azzan Khan</p>
+  </footer>;
 }
 
 function Shell({ children }: { children: React.ReactNode }) {
@@ -77,6 +103,7 @@ function PostCard({ post }: { post: Post }) {
 
 const featuredWork = [
   {
+    id: 'clinical-learning-platform',
     tag: 'Healthcare · Learning',
     title: 'Clinical Learning Platform',
     problem: 'A scalable learning experience for doctors and nurses, built on reusable components and structured content access.',
@@ -84,6 +111,7 @@ const featuredWork = [
     tech: 'React · Node.js · SQL · AWS · Claude agents',
   },
   {
+    id: 'microbial-detection-platform',
     tag: 'AI · Healthcare',
     title: 'Microbial Detection Platform',
     problem: 'Automatically identify and count microbial colonies from laboratory imagery.',
@@ -91,6 +119,7 @@ const featuredWork = [
     tech: 'Angular · Node.js · Azure · CI/CD · Computer vision',
   },
   {
+    id: 'ecommerce-platform',
     tag: 'Commerce · APIs',
     title: 'Ecommerce Platform',
     problem: "A dynamic, modular storefront for one of Europe's largest postal and ecommerce services.",
@@ -99,30 +128,38 @@ const featuredWork = [
   },
 ];
 
-const services = [
+const whatIBuild = [
   {
-    title: 'Business website development',
-    summary: 'A fast, professional website for your business, designed and built to be found on Google and to turn visitors into enquiries.',
-    who: 'Small and mid-size businesses, clinics, schools, and local organisations.',
-    points: ['Custom design shaped around your brand and audience', 'Mobile-first, fast-loading pages with clean, accessible markup', 'SEO foundations: page metadata, sitemap, and structured data', 'Contact forms, analytics, and hosting set up for you', 'Handover notes, so you can update content with confidence'],
-  },
-  {
-    title: 'Custom web application development',
+    id: 'full-stack-applications',
+    title: 'Full-stack applications',
+    brief: 'Connected interfaces, APIs, and data built around real workflows.',
     summary: 'Dashboards, portals, and internal tools that replace spreadsheets, manual steps, and disconnected systems.',
     who: 'Teams that have outgrown spreadsheets, or need a customer or staff portal.',
     points: ['Requirements and acceptance criteria agreed before the build starts', 'Secure authentication and role-based access', 'APIs and databases designed around how your data is used', 'Cloud deployment with CI/CD and monitoring', 'Built to be extended as the business grows'],
   },
   {
+    id: 'ai-integration-and-automation',
     title: 'AI integration and automation',
+    brief: 'Practical AI features that make existing products and processes work smarter.',
     summary: 'Practical AI features and workflows that plug into the software you already use, rather than a risky rebuild.',
     who: 'Businesses that want to automate repetitive work, or make their own content and data searchable.',
     points: ['AI assistants or search over your own documents and content', 'Document, email, or data processing pipelines', 'Integration with your existing APIs and systems', 'Guardrails, logging, and human review where it matters', 'Measured against the outcome you care about'],
   },
   {
-    title: 'Website modernization',
-    summary: 'Bring an old site or application up to current standards, without starting from zero.',
+    id: 'application-modernization-and-cloud-delivery',
+    title: 'Application modernization and cloud delivery',
+    brief: 'Modernize what you have and make the path to production more reliable.',
+    summary: 'Modernize an older site or application and improve its cloud delivery, without starting from zero.',
     who: 'Sites built years ago, legacy WordPress installs, or frontends that are slow, insecure, or hard to change.',
     points: ['Audit of performance, security, accessibility, and SEO', 'Migration to a modern stack, with a clear phased plan', 'URLs and SEO preserved, so existing search rankings are protected', 'Staged rollout with a fallback at each step', 'Documentation of what changed and why'],
+  },
+  {
+    id: 'business-websites',
+    title: 'Business websites',
+    brief: 'Clear, responsive websites that turn a first visit into a great first impression.',
+    summary: 'A fast, professional website for your business, designed and built to be found on Google and to turn visitors into enquiries.',
+    who: 'Small and mid-size businesses, clinics, schools, and local organisations.',
+    points: ['Custom design shaped around your brand and audience', 'Mobile-first, fast-loading pages with clean, accessible markup', 'SEO foundations: page metadata, sitemap, and structured data', 'Contact forms, analytics, and hosting set up for you', 'Handover notes, so you can update content with confidence'],
   },
 ];
 
@@ -149,32 +186,33 @@ export function Home() {
         <p className="eyebrow">{dot}Lead Full-Stack Engineer · AI-native builder · India</p>
         <h1>I turn complex ideas into <em>production software.</em></h1>
         <p className="hero-lead">Across healthcare, learning, and enterprise platforms, I take products from specification to production, with every engineering decision kept human-owned.</p>
-        <div className="hero-actions"><Link className="button button-dark" href="/work">View my work {arrow}</Link><Link className="text-link" href="/#how-i-build">Read how I build {arrow}</Link></div>
+        <div className="hero-actions"><Link className="button button-dark" href="/work">View my work {arrow}</Link><Link className="text-link" href="/what-i-build">Explore what I build {arrow}</Link></div>
         <div className="hero-status"><span className="status-pulse" />Open to thoughtful collaborations <span>·</span> based in India</div>
       </div>
       <figure className="hero-portrait"><img src="/media/azzan-portrait.webp" alt="Azzan Khan" /></figure>
     </section>
     <section className="signal-bar">
       <div><strong>7+</strong><span>years in enterprise engineering</span></div>
-      <div><strong>5</strong><span>enterprise clients · Elsevier, GSK, GE, Roche, bpost</span></div>
+      <div><strong>E2E</strong><span>Full-stack engineering<br />Frontend · Backend · Cloud</span></div>
       <div><strong>2</strong><span>awards · Key Contributor / Digital Ninja</span></div>
     </section>
-    <section className="sdd-band" id="how-i-build">
-      <p className="eyebrow">{dot}How I build</p>
-      <h2>Specify first. <em>Let agents execute.</em></h2>
-      <p className="sdd-copy">AI can write code extremely quickly. The harder problem is telling it what the software should do. I define the problem, constraints, expected behaviour, and acceptance criteria first, then let agents execute against them, with human review on every change.</p>
-      <p className="sdd-flow">Requirements → Specification → Agent → Code → Tests → Review</p>
+    <section className="section build-overview">
+      <div className="section-heading">
+        <div><p className="eyebrow">{dot}Capabilities</p><h2>What I <em>build.</em></h2></div>
+        <Link className="text-link" href="/what-i-build">Explore capabilities {arrow}</Link>
+      </div>
+      <div className="build-overview-grid">{whatIBuild.map(({ id, title, brief }, index) => <Link className="build-overview-card" key={id} href={`/what-i-build#${id}`}><span className="build-card-top"><span className="build-card-number">0{index + 1}</span></span><span className="build-card-title">{title}</span><span className="build-card-brief">{brief}</span></Link>)}</div>
     </section>
     <section className="section">
       <div className="section-heading">
         <div><p className="eyebrow">{dot}Selected work</p><h2>Real problems.<br /><em>Production outcomes.</em></h2></div>
         <Link className="text-link" href="/work">All case studies {arrow}</Link>
       </div>
-      <div className="story-grid">{featuredWork.map(({ tag, title, problem, outcome, tech }, index) => <article className="story-card" key={title}><span className="case-number">0{index + 1}</span><p className="eyebrow">{tag}</p><h3>{title}</h3><div className="story-line"><span>Problem</span><p>{problem}</p></div><div className="story-line"><span>Outcome</span><p>{outcome}</p></div><p className="story-tech">{tech}</p></article>)}</div>
+      <div className="story-grid">{featuredWork.map(({ id, tag, title, problem, outcome, tech }, index) => <Link className="story-card" href={`/work#${id}`} key={title}><span className="case-number">0{index + 1}</span><p className="eyebrow">{tag}</p><h3>{title}</h3><div className="story-line"><span>Problem</span><p>{problem}</p></div><div className="story-line"><span>Outcome</span><p>{outcome}</p></div><p className="story-tech">{tech}</p></Link>)}</div>
     </section>
     <section className="section side-quests">
       <div className="section-heading">
-        <div><p className="eyebrow">{dot}Small builds, independent projects, and experiments</p><h2>Side <em>quests.</em></h2></div>
+        <div><p className="eyebrow">{dot}Side Quests</p><h2>Independent <em>builds.</em></h2><p className="lead">Independent projects, experiments, and small builds exploring practical solutions through code.</p></div>
       </div>
       <div className="quest-grid">{featuredQuests.map(({ tag, title, copy, url, label }) => <a className="quest-card" key={title} href={url} target="_blank" rel="noreferrer"><p className="eyebrow">{tag}</p><h3>{title}</h3><p>{copy}</p><span className="quest-link">{label} {arrow}</span></a>)}</div>
     </section>
@@ -206,6 +244,7 @@ function Article({ post }: { post: Post }) {
 function WorkPage() {
   const projects = [
     {
+      id: 'clinical-learning-platform',
       title: 'Clinical Learning Platform',
       client: 'Client: Elsevier · associated with CitiusTech',
       dates: 'Jan 2025 — present',
@@ -217,6 +256,7 @@ function WorkPage() {
       tech: 'React · Node.js · SQL · AWS · Claude agents · SDD',
     },
     {
+      id: 'microbial-detection-platform',
       title: 'Microbial Detection Platform',
       client: 'Client: GSK · associated with CitiusTech',
       dates: 'Jan 2024 — Dec 2024',
@@ -228,6 +268,7 @@ function WorkPage() {
       tech: 'Angular · Node.js · Azure · CI/CD · Computer vision',
     },
     {
+      id: 'healthcare-communication-portal',
       title: 'Healthcare Communication Portal',
       client: 'Client: GE Healthcare · associated with CitiusTech',
       dates: 'Aug 2022 — Dec 2023',
@@ -239,6 +280,7 @@ function WorkPage() {
       tech: 'React · Node.js · AWS EC2 · Lambda',
     },
     {
+      id: 'data-visualization-tool',
       title: 'Data Visualization Tool',
       client: 'Client: Roche · associated with CitiusTech',
       dates: 'Jan 2022 — Jul 2022',
@@ -251,6 +293,7 @@ function WorkPage() {
       url: 'https://www.wayfind-r.com/home.html',
     },
     {
+      id: 'ecommerce-platform',
       title: 'Ecommerce Platform',
       client: 'Client: Belgium Post · associated with Infosys',
       dates: 'Jul 2021 — Dec 2021',
@@ -263,6 +306,7 @@ function WorkPage() {
       url: 'https://www.bpost.be/en',
     },
     {
+      id: 'cloud-migration-to-aws',
       title: 'Cloud Migration to AWS',
       client: 'Client: Belgium Post · associated with Infosys',
       dates: 'Sep 2019 — Jun 2021',
@@ -274,16 +318,16 @@ function WorkPage() {
       tech: 'AWS Lambda · S3 · Step Functions',
     },
   ];
-  return <Shell><Intro kicker="Selected work" title={<>Proof over<br /><em>promises.</em></>} copy="Six public-safe case studies from enterprise programmes associated with CitiusTech and Infosys — the problems, the engineering, and the production outcomes." /><section className="case-study-grid">{projects.map(({ title, client, dates, tag, problem, role, engineering, outcome, tech, url }, index) => <article className="case-study case-story" key={title}><span className="case-number">0{index + 1}</span><p className="eyebrow">{tag}</p><h2>{title}</h2><p className="case-client">{client}</p><p className="case-dates">{dates}</p><div className="case-block"><span>The problem</span><p>{problem}</p></div><div className="case-block"><span>My role</span><p>{role}</p></div><div className="case-block"><span>Engineering</span><ul>{engineering.map((item) => <li key={item}>{item}</li>)}</ul></div><div className="case-block"><span>Outcome</span><p>{outcome}</p></div><p className="case-capabilities"><span>Technologies</span>{tech}</p>{url && <a className="case-link" href={url} target="_blank" rel="noreferrer">View public organisation site {arrow}</a>}</article>)}</section><section className="section side-quests">
+  return <Shell><Intro kicker="Selected work" title={<>Enterprise<br /><em>Engineering.</em></>} copy="I've contributed to enterprise applications across healthcare, education, computer vision, and business systems. My experience spans full-stack development, API integrations, authentication, cloud deployment, and AI-assisted engineering, with a focus on building maintainable, production-ready software." /><section className="section enterprise-section"><div className="case-study-grid">{projects.map(({ id, title, client, dates, tag, problem, role, engineering, outcome, tech, url }, index) => <article id={id} className="case-study case-story" key={title}><span className="case-number">0{index + 1}</span><p className="eyebrow">{tag}</p><h2>{title}</h2><p className="case-client">{client}</p><p className="case-dates">{dates}</p><div className="case-block"><span>The problem</span><p>{problem}</p></div><div className="case-block"><span>My role</span><p>{role}</p></div><div className="case-block"><span>Engineering</span><ul>{engineering.map((item) => <li key={item}>{item}</li>)}</ul></div><div className="case-block"><span>Outcome</span><p>{outcome}</p></div><p className="case-capabilities"><span>Technologies</span>{tech}</p>{url && <a className="case-link" href={url} target="_blank" rel="noreferrer">View public organisation site {arrow}</a>}</article>)}</div></section><section className="section side-quests">
       <div className="section-heading">
-        <div><p className="eyebrow">{dot}Small builds, independent projects, and experiments</p><h2>Side <em>quests.</em></h2></div>
+        <div><p className="eyebrow">{dot}Side Quests</p><h2>Independent <em>builds.</em></h2><p className="lead">Independent projects, experiments, and small builds exploring practical solutions through code.</p></div>
       </div>
       <div className="quest-grid">{featuredQuests.map(({ tag, title, copy, url, label }) => <a className="quest-card" key={title} href={url} target="_blank" rel="noreferrer"><p className="eyebrow">{tag}</p><h3>{title}</h3><p>{copy}</p><span className="quest-link">{label} {arrow}</span></a>)}</div>
-    </section><section className="split-callout"><p className="eyebrow">The common thread</p><h2>Same loop,<br /><em>every project.</em></h2><p>Understand, specify, architect, build with agents, validate, ship. The stack changes per project — the discipline doesn&apos;t.</p><Link className="text-link" href="/#how-i-work">See how I work {arrow}</Link></section></Shell>;
+    </section><section className="split-callout"><p className="eyebrow">The common thread</p><h2>Same loop,<br /><em>every project.</em></h2><p>Understand, specify, architect, build with agents, validate, ship. The stack changes per project — the discipline doesn&apos;t.</p><Link className="button button-dark" href="/what-i-build">Explore what I build {arrow}</Link></section></Shell>;
 }
 
-function ServicesPage() {
-  return <Shell><Intro kicker="Services" title={<>What I can build<br /><em>for you.</em></>} copy="Websites, web applications, AI integration, and modernization. Each one follows the same specification-first approach I use for everything else." /><section className="service-list">{services.map(({ title, summary, who, points }, index) => <article className="service-item" key={title}><span className="service-number">0{index + 1}</span><div><h2>{title}</h2><p>{summary}</p><p className="service-who"><strong>Best for:</strong> {who}</p><ul>{points.map((point) => <li key={point}>{point}</li>)}</ul></div><Link className="service-arrow" href="/contact" aria-label={`Enquire about ${title}`}>↗</Link></article>)}</section><section className="split-callout"><p className="eyebrow">Not sure which fits?</p><h2>Tell me the problem,<br /><em>not the solution.</em></h2><p>Most projects start with a short conversation about what isn&apos;t working. I&apos;ll tell you honestly which option makes sense, including when you don&apos;t need me.</p><Link className="button button-dark" href="/contact">Start a conversation {arrow}</Link></section></Shell>;
+function WhatIBuildPage() {
+  return <Shell><Intro kicker="Capabilities" title={<>What I <em>build.</em></>} copy="A snapshot of the kinds of engineering work I have experience delivering, from business websites to full-stack platforms, AI integrations, and modernization." /><section className="capability-grid">{whatIBuild.map(({ id, title, summary, who, points }, index) => <article className="capability-card" id={id} key={id}><span className="case-number">0{index + 1}</span><h2>{title}</h2><p className="capability-summary">{summary}</p><p className="capability-who"><strong>Best for:</strong> {who}</p><ul>{points.map((point) => <li key={point}>{point}</li>)}</ul></article>)}</section><section className="cta-section capability-cta"><p className="eyebrow">{dot}Have something in mind?</p><h2>Let&apos;s talk about what<br /><em>you&apos;re building.</em></h2><p className="cta-copy">Whether you have a clear brief or just an early idea, I&apos;d be glad to hear about it and explore how we could work together.</p><Link className="button button-dark" href="/contact">Start a conversation {arrow}</Link></section></Shell>;
 }
 
 function ProjectsPage() {
@@ -299,9 +343,33 @@ function StandardPage({ kind }: { kind: string }) {
   };
   const item = content[kind] ?? content.about;
   if (kind === 'work') return <WorkPage />;
-  if (kind === 'services') return <ServicesPage />;
+  if (kind === 'what-i-build' || kind === 'services') return <WhatIBuildPage />;
   if (kind === 'projects') return <ProjectsPage />;
-  if (kind === 'about') return <Shell><Intro {...item} /><section className="about-grid"><div className="about-statement"><p>I&apos;m a Lead Engineer and full-stack developer with 7+ years of experience building enterprise-grade web applications across healthcare, learning, AI-assisted workflows, and ecommerce.</p><p>I work across modern web platforms, APIs, cloud infrastructure, data systems, and delivery practices. I enjoy turning complex product requirements into clear, maintainable software, and I use AI-assisted development to accelerate the work while keeping engineering judgment in the loop.</p></div><div className="about-facts"><div><span>Current role</span><strong>Lead Engineer<br />CitiusTech · Apr 2024 — present</strong></div><div><span>Prior role</span><strong>Senior Software Engineer<br />CitiusTech · Jan 2022 — Mar 2024</strong></div><div><span>Earlier</span><strong>Systems Engineer → Senior Systems Engineer<br />Infosys · Jan 2019 — Jan 2022</strong></div><div><span>Recognition</span><strong>Key Contributor Award · 2023<br />Digital Ninja Award · 2021<br /><small>Associated with CitiusTech / Infosys</small></strong></div></div></section><section className="section"><div className="section-heading"><div><p className="eyebrow">{dot}Capabilities</p><h2>Skills, <em>by what they do.</em></h2></div></div></section><section className="skills-grid">{capabilityGroups.map(([number, title, subtitle, skills, extra]) => <article className={`skill-card ${extra}`} key={number}><span className="skill-number">{number}</span><p className="eyebrow">{subtitle}</p><h2>{title}</h2><p className="skill-list">{skills}</p></article>)}</section><section className="section now-section"><div className="section-heading"><div><p className="eyebrow">{dot}Now</p><h2>Where the craft<br /><em>is heading.</em></h2></div></div><div className="now-grid"><p className="now-lead">Currently exploring AI-native software engineering — not as a badge, but as a daily working practice on a real production platform.</p><div className="now-chips"><span>Specification-driven development</span><span>Coding agents</span><span>Agentic workflows</span><span>AI-assisted testing</span><span>Automated documentation</span><span>Generative UI workflows</span><span>Developer education</span></div></div></section><section className="career-section"><p className="eyebrow">{dot}Professional journey</p><h2>Experience across<br /><em>high-stakes products.</em></h2><div className="career-grid"><div><strong>CitiusTech</strong><span>Lead Engineer · Apr 2024 — present<br />Senior Software Engineer · Jan 2022 — Mar 2024</span><p>Enterprise healthcare and learning products, contributing across architecture, full-stack development, APIs, data, cloud delivery, CI/CD, and production quality.</p></div><div><strong>Infosys</strong><span>Senior Systems Engineer · Jan 2021 — Jan 2022<br />Systems Engineer · Jun 2019 — Dec 2020<br />Trainee · Jan 2019 — May 2019</span><p>Enterprise ecommerce and cloud modernization work, delivering modular product experiences, API integrations, and AWS-backed workflows.</p></div></div></section></Shell>;
+  if (kind === 'about') return <Shell>
+    <Intro {...item} />
+    <section className="about-grid">
+      <div className="about-statement">
+        <p>I&apos;m a Lead Engineer and full-stack developer with 7+ years of experience building enterprise-grade web applications across healthcare, learning, AI-assisted workflows, and ecommerce.</p>
+        <p>I work across modern web platforms, APIs, cloud infrastructure, data systems, and delivery practices. I enjoy turning complex product requirements into clear, maintainable software, and I use AI-assisted development to accelerate the work while keeping engineering judgment in the loop.</p>
+      </div>
+      <div className="about-facts">
+        <div><span>Current role</span><strong>Lead Engineer<br />CitiusTech · Apr 2024 — present</strong></div>
+        <div><span>Prior role</span><strong>Senior Software Engineer<br />CitiusTech · Jan 2022 — Mar 2024</strong></div>
+        <div><span>Earlier</span><strong>Systems Engineer → Senior Systems Engineer<br />Infosys · Jan 2019 — Jan 2022</strong></div>
+        <div><span>Recognition</span><strong>Key Contributor Award · 2023<br />Digital Ninja Award · 2021<br /><small>Associated with CitiusTech / Infosys</small></strong></div>
+      </div>
+    </section>
+    <section className="section"><div className="section-heading"><div><p className="eyebrow">{dot}Capabilities</p><h2>Skills, <em>by what they do.</em></h2></div></div></section>
+    <section className="skills-grid">{capabilityGroups.map(([number, title, subtitle, skills, extra]) => <article className={`skill-card ${extra}`} key={number}><span className="skill-number">{number}</span><p className="eyebrow">{subtitle}</p><h2>{title}</h2><p className="skill-list">{skills}</p></article>)}</section>
+    <section className="career-section">
+      <p className="eyebrow">{dot}Professional journey</p>
+      <h2>Experience across<br /><em>high-stakes products.</em></h2>
+      <div className="career-grid">
+        <div><strong>CitiusTech</strong><span>Lead Engineer · Apr 2024 — present<br />Senior Software Engineer · Jan 2022 — Mar 2024</span><p>Enterprise healthcare and learning products, contributing across architecture, full-stack development, APIs, data, cloud delivery, CI/CD, and production quality.</p></div>
+        <div><strong>Infosys</strong><span>Senior Systems Engineer · Jan 2021 — Jan 2022<br />Systems Engineer · Jun 2019 — Dec 2020<br />Trainee · Jan 2019 — May 2019</span><p>Enterprise ecommerce and cloud modernization work, delivering modular product experiences, API integrations, and AWS-backed workflows.</p></div>
+      </div>
+    </section>
+  </Shell>;
   if (kind === 'contact') return <Shell><Intro {...item} /><section className="contact-layout"><div className="contact-copy"><p className="eyebrow">Reach out directly</p><ul className="direct-list"><li><a href="mailto:azzankhanofficial@gmail.com"><strong>Email {arrow}</strong><span className="handle">azzankhanofficial@gmail.com</span><small>Best for hiring, consulting, and longer messages.</small></a></li><li><a href="https://www.linkedin.com/in/azzan-khan-871958114/" target="_blank" rel="noreferrer"><strong>LinkedIn {arrow}</strong><span className="handle">in/azzan-khan-871958114</span><small>Professional inquiries and recruiting.</small></a></li><li><a href="https://github.com/azzankhan" target="_blank" rel="noreferrer"><strong>GitHub {arrow}</strong><span className="handle">github.com/azzankhan</span><small>Code samples, open-source work, and issues on shared repos.</small></a></li></ul></div><ContactForm /></section></Shell>;
   return <Shell><Intro {...item} /><section className="split-callout"><p className="eyebrow">Azzan Khan</p><h2>Less theatre.<br /><em>More progress.</em></h2><p>Clear questions, small iterations, and enough care in the details to make the final thing feel inevitable.</p><Link className="button button-dark" href="/contact">Start a conversation {arrow}</Link></section></Shell>;
 }
@@ -315,6 +383,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     return post ? <Article post={post} /> : <StandardPage kind="work" />;
   }
   if (slug[0] === 'blog') return <Blog />;
-  if (!['work', 'services', 'projects', 'about', 'contact', 'youtube'].includes(slug[0])) notFound();
+  if (!['work', 'what-i-build', 'services', 'projects', 'about', 'contact', 'youtube'].includes(slug[0])) notFound();
   return <StandardPage kind={slug[0]} />;
 }

@@ -193,6 +193,46 @@ html[data-theme="light"] .career-section .career-grid span{font-size:11px;line-h
 html[data-theme="light"] .about-grid .about-facts span,
 html[data-theme="light"] .proof-note .eyebrow{font-size:11px;letter-spacing:.08em}
 
+.enterprise-section{padding-top:10px}
+.enterprise-section .section-heading{margin-bottom:34px}
+.case-story[id],.service-item[id]{scroll-margin-top:30px}
+.story-card{color:var(--ink)}
+.story-card:focus-visible,.build-overview-card:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.story-open{margin-top:14px;color:var(--lime);font-size:11px;font-weight:800}
+.story-card:hover .story-open{color:var(--accent)}
+.build-overview{padding-top:50px;padding-bottom:35px}
+.build-overview-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.build-overview-card{min-height:118px;border:1px solid var(--line);background:var(--cream);padding:20px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;font-size:16px;font-weight:800;line-height:1.2;transition:transform .2s,border-color .2s}
+.build-overview-card:hover{transform:translateY(-3px);border-color:var(--lime)}
+.build-overview-card span{max-width:190px}
+.build-overview-card>span+span{color:var(--accent)}
+.side-quests .section-heading .lead{margin-top:16px}
+.service-item[id]{scroll-margin-top:30px}
+@media(max-width:800px){.build-overview{padding-top:35px;padding-bottom:20px}.build-overview-grid{grid-template-columns:1fr 1fr}.build-overview-card{min-height:95px;padding:16px;font-size:14px}.enterprise-section{padding-top:0}}
+@media(max-width:480px){.build-overview-grid{grid-template-columns:1fr}.build-overview-card{min-height:72px}}
+
+.build-overview-grid{gap:14px}
+.build-overview-card{min-height:190px;position:relative;overflow:hidden;align-items:stretch;justify-content:flex-start;flex-direction:column;padding:21px 22px 20px;border-radius:3px;background:linear-gradient(145deg,var(--cream),color-mix(in srgb,var(--cream) 82%,var(--paper)));transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.build-overview-card:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .22s ease}
+.build-overview-card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 12px 28px rgba(0,0,0,.12)}
+.build-overview-card:hover:before{transform:scaleX(1)}
+.build-card-top{display:flex;justify-content:space-between;align-items:center}
+.build-card-number{font:10px var(--mono);letter-spacing:.08em;color:var(--muted)}
+.build-card-title{max-width:230px;font-size:17px;line-height:1.2;font-weight:800;letter-spacing:-.035em;color:var(--ink)}
+.build-card-brief{max-width:255px;margin-top:auto;padding-top:12px;color:var(--muted);font-size:12px;line-height:1.6}
+.build-overview-card .build-card-top{max-width:none;width:100%}
+.build-overview-card .build-card-number{max-width:none}
+.build-overview-card .build-card-title{max-width:230px;color:var(--ink)}
+.build-overview-card .build-card-brief{max-width:255px;color:var(--muted)}
+html[data-theme="light"] .build-overview-card{background:linear-gradient(145deg,#fffdf7,#f0f2e9);border-color:#c8d0c6}
+html[data-theme="light"] .build-overview-card:hover{border-color:#df5e43;box-shadow:0 12px 26px rgba(19,34,31,.12)}
+html[data-theme="light"] .build-overview-card .build-card-title{color:#13221f}
+html[data-theme="light"] .build-overview-card .build-card-brief{color:#4c5c55}
+html[data-theme="light"] .build-card-number{color:#58675e}
+@media(max-width:800px){.build-overview-grid{gap:12px}.build-overview-card{min-height:175px;padding:18px}.build-card-title{font-size:15px}}
+@media(max-width:480px){.build-overview-grid{grid-template-columns:1fr}.build-overview-card{min-height:145px}.build-card-title{max-width:none}.build-card-brief{max-width:320px}}
+@media(prefers-reduced-motion:reduce){.build-overview-card,.build-overview-card:before{transition:none}}
+
 /* ── Repositioning layer: process, SDD, story cards, now, video embed ── */
 
 #how-i-build{scroll-margin-top:40px}
@@ -401,3 +441,162 @@ html[data-theme="light"] .quest-card:hover .quest-link{color:#607d18}
 .cta-copy{color:var(--muted);max-width:520px;margin:18px auto 0;font-size:16px}
 
 @media(max-width:800px){.service-cards{grid-template-columns:1fr}}
+
+/* Shared card treatment: lime focus, lift, and a quiet surface across sections. */
+.build-overview-card:before{background:var(--lime)}
+.build-overview-card:hover{border-color:var(--lime)}
+.build-overview-card:hover .build-card-title{color:var(--ink)}
+.story-card:hover,.case-study:hover,.quest-card:hover,.skill-card:hover,
+.project-notes>div:hover,.post-card:hover,.capability-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--lime);
+  box-shadow:inset 0 0 0 1px var(--lime),0 12px 28px rgba(0,0,0,.12)
+}
+.build-overview-card:hover{box-shadow:inset 0 0 0 1px var(--lime),0 12px 28px rgba(0,0,0,.12)}
+.story-open,.quest-card:hover .quest-link{color:var(--lime)}
+.story-card,.case-study,.quest-card,.skill-card,.project-notes>div,.post-card,.capability-card{
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease
+}
+.quest-card,.post-card,.project-notes>div,.capability-card{
+  border:1px solid var(--line);
+  background:var(--cream)
+}
+.quest-card{padding:22px}
+.project-notes>div{padding:24px}
+.post-card{padding:0;overflow:hidden}
+.capability-grid{
+  max-width:1176px;
+  margin:0 auto;
+  padding:0 32px 110px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px
+}
+.capability-card{
+  position:relative;
+  padding:30px;
+  scroll-margin-top:30px
+}
+.capability-card h2{font-size:30px;line-height:1.08;letter-spacing:-.055em;margin:24px 0 14px}
+.capability-summary,.capability-who{font-size:14px;line-height:1.7;color:var(--muted)}
+.capability-summary{margin:0}
+.capability-who{margin:14px 0 0}
+.capability-who strong{color:var(--ink)}
+.capability-card ul{margin:18px 0 0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.75}
+.skill-card:hover .skill-number{color:var(--lime)}
+.story-card:focus-visible,.build-overview-card:focus-visible,.quest-card:focus-visible{
+  outline:2px solid var(--lime);
+  outline-offset:4px
+}
+html[data-theme="light"] .build-overview-card:hover,
+html[data-theme="light"] .story-card:hover,
+html[data-theme="light"] .case-study:hover,
+html[data-theme="light"] .quest-card:hover,
+html[data-theme="light"] .skill-card:hover,
+html[data-theme="light"] .project-notes>div:hover,
+html[data-theme="light"] .post-card:hover,
+html[data-theme="light"] .capability-card:hover{
+  border-color:#607d18;
+box-shadow:inset 0 0 0 1px #607d18,0 12px 26px rgba(19,34,31,.12)
+}
+html[data-theme="light"] .build-overview-card:hover{box-shadow:inset 0 0 0 1px #607d18,0 12px 26px rgba(19,34,31,.12)}
+html[data-theme="light"] .build-overview-card:before{background:#607d18}
+html[data-theme="light"] .story-open,
+html[data-theme="light"] .quest-card:hover .quest-link{color:#607d18}
+html[data-theme="light"] .skill-number{color:var(--accent)!important}
+
+.capability-cta{
+  max-width:1176px;
+  margin:0 auto 100px;
+  padding:65px;
+  text-align:left
+}
+.capability-cta .eyebrow{justify-content:flex-start}
+.capability-cta .cta-copy{max-width:900px;margin:18px 0 0;color:#263b2b}
+.capability-cta .button{margin-top:28px}
+
+.build-card-number{color:var(--accent)}
+.build-overview-card:hover .build-card-number,
+.story-card:hover .case-number,.story-card:focus-visible .case-number,
+.story-card:hover .story-line>span,.story-card:focus-visible .story-line>span,
+.case-study:hover .case-number,.case-study:focus-within .case-number,
+.case-study:hover .case-dates,.case-study:hover .case-block>span,
+.case-study:hover .case-capabilities>span,.case-study:hover .case-link,
+.capability-card:hover .case-number,.skill-card:hover .skill-number,
+.skill-card:focus-within .skill-number,
+.post-card:hover .post-meta span:first-child,
+.post-card:focus-within .post-meta span:first-child{
+  color:var(--lime)
+}
+html[data-theme="light"] .build-overview-card:hover .build-card-number,
+html[data-theme="light"] .story-card:hover .case-number,
+html[data-theme="light"] .story-card:focus-visible .case-number,
+html[data-theme="light"] .story-card:hover .story-line>span,
+html[data-theme="light"] .story-card:focus-visible .story-line>span,
+html[data-theme="light"] .case-study:hover .case-number,
+html[data-theme="light"] .case-study:focus-within .case-number,
+html[data-theme="light"] .case-study:hover .case-dates,
+html[data-theme="light"] .case-study:hover .case-block>span,
+html[data-theme="light"] .case-study:hover .case-capabilities>span,
+html[data-theme="light"] .case-study:hover .case-link,
+html[data-theme="light"] .capability-card:hover .case-number,
+html[data-theme="light"] .skill-card:hover .skill-number,
+html[data-theme="light"] .skill-card:focus-within .skill-number,
+html[data-theme="light"] .post-card:hover .post-meta span:first-child,
+html[data-theme="light"] .post-card:focus-within .post-meta span:first-child{
+  color:#607d18
+}
+@media(max-width:800px){
+  .capability-grid{grid-template-columns:1fr;padding:0 20px 75px}
+  .capability-card{padding:24px}
+  .capability-card h2{font-size:25px}
+  .capability-cta{margin:0 20px 75px;padding:40px 28px}
+}
+@media(prefers-reduced-motion:reduce){
+  .story-card,.case-study,.quest-card,.skill-card,.project-notes>div,.post-card,.capability-card{transition:none}
+}
+
+.hero-actions .text-link{font-size:12px;font-weight:800}
+.split-callout .button-dark{background:#101817;color:var(--lime)}
+.split-callout .button-dark:hover{background:#101817;color:var(--lime)}
+.site-footer{
+  max-width:1176px;
+  margin:0 auto;
+  padding:55px 32px 28px;
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(130px,.55fr) minmax(130px,.55fr);
+  gap:50px
+}
+.footer-brand .logo-mark{background:var(--lime);color:#101817}
+.logo-mark{width:37px;height:26px;object-fit:contain;border-radius:0;background:none!important;color:transparent!important;font-size:0;letter-spacing:0}
+html[data-theme="light"] .logo-mark{content:url('/media/new-icon-light.png')}
+.footer-brand .logo-mark{background:none!important;color:transparent!important}
+.footer-brand>p{max-width:360px;color:var(--muted);font-size:14px;margin:18px 0}
+.footer-socials{display:flex;gap:9px;margin-top:24px}
+.footer-socials a{
+  width:38px;height:38px;border:1px solid var(--line);border-radius:50%;
+  display:grid;place-items:center;color:var(--ink);font-size:12px;font-weight:800;
+  transition:border-color .2s,color .2s,transform .2s
+}
+.footer-socials svg{width:17px;height:17px;display:block;fill:currentColor}
+.footer-socials a[aria-label="LinkedIn"]{color:#0a66c2}
+.footer-socials a[aria-label="GitHub"]{color:#59636e}
+.footer-socials a[aria-label="YouTube"]{color:#ff0000}
+.footer-socials a:hover{border-color:var(--lime);color:var(--lime);transform:translateY(-2px)}
+.footer-column{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.footer-column h2{margin:0 0 7px;color:var(--muted);font:500 10px var(--mono);letter-spacing:.13em;text-transform:uppercase}
+.footer-column a{font-size:13px;color:var(--ink);transition:color .2s}
+.footer-column a:hover{color:var(--lime)}
+.site-footer .copyright{
+  grid-column:1/-1;
+  border-top:1px solid var(--line);
+  margin:12px 0 0;
+  padding-top:20px;
+  text-align:left
+}
+@media(max-width:700px){
+  .site-footer{grid-template-columns:1fr 1fr;gap:34px 24px;padding:42px 20px 24px}
+  .footer-brand{grid-column:1/-1}
+  .site-footer .copyright{grid-column:1/-1}
+}
