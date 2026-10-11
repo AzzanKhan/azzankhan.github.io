@@ -43,5 +43,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" suppressHydrationWarning className={`${manrope.variable} ${dmMono.variable}`}><head><script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('azzan-theme');if(t==='light')document.documentElement.dataset.theme='light'}catch(e){}` }} /></head><body>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} /></body></html>;
+  return <html lang="en" data-theme="dark" suppressHydrationWarning className={`${manrope.variable} ${dmMono.variable}`}><head><script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('azzan-theme');if(t==='light')document.documentElement.dataset.theme='light'}catch(e){}` }} /></head><body>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} /></body></html>;
 }
