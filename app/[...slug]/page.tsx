@@ -14,8 +14,7 @@ const navItems = [['What I build', '/what-i-build'], ['Work', '/work'], ['About'
 
 const pageMeta: Record<string, { title: string; description: string }> = {
   work: { title: 'Selected work', description: 'Enterprise case studies in healthcare, learning, AI, and commerce: the problems, the engineering decisions, and the production outcomes.' },
-  'what-i-build': { title: 'What I build', description: 'Business websites, full-stack applications, AI integrations and automation, and application modernization.' },
-  services: { title: 'What I build', description: 'Business websites, full-stack applications, AI integrations and automation, and application modernization.' },
+  'what-i-build': { title: 'What I build', description: 'Business websites, Applications, AI integrations and automation, and application modernization.' },
   projects: { title: 'Projects', description: 'Small builds, experiments, and independent projects, including Garden Public School.' },
   about: { title: 'About', description: 'Azzan Khan: a Lead Full-Stack Engineer with 7+ years across healthcare, learning, enterprise, and cloud platforms.' },
   blog: { title: 'Writing', description: 'Practical notes on JavaScript, APIs, authentication, Docker, and cloud deployment by Azzan Khan.' },
@@ -37,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       };
     }
   }
-  const key = slug[0] === 'services' ? 'what-i-build' : (slug[0] ?? '');
+  const key = slug[0] ?? '';
   const meta = pageMeta[key];
   if (!meta) return {};
   return {
@@ -50,20 +49,20 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 
 export function generateStaticParams() {
   return [
-    { slug: ['work'] }, { slug: ['what-i-build'] }, { slug: ['services'] }, { slug: ['projects'] },
+    { slug: ['work'] }, { slug: ['what-i-build'] }, { slug: ['projects'] },
     { slug: ['blog'] }, { slug: ['about'] }, { slug: ['contact'] }, { slug: ['youtube'] },
     ...posts.map((post) => ({ slug: ['blog', post.slug] })),
   ];
 }
 
 function Header() {
-  return <header className="site-header"><Link className="logo" href="/"><img className="logo-mark" src="/media/new-icon-dark.png" alt="" /><span>Azzan Khan</span></Link><nav className="desktop-nav" aria-label="Primary navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}</nav><div className="header-actions"><ThemeToggle /></div><details className="mobile-menu"><summary aria-label="Open navigation"></summary><nav aria-label="Mobile navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}<ThemeToggle /></nav></details></header>;
+  return <header className="site-header"><Link className="logo" href="/"><img className="logo-mark" src="/media/new-icon-dark.webp" alt="" width="34" height="34" /><span>Azzan Khan</span></Link><nav className="desktop-nav" aria-label="Primary navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}</nav><div className="header-actions"><ThemeToggle /></div><details className="mobile-menu"><summary aria-label="Open navigation"></summary><nav aria-label="Mobile navigation">{navItems.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}<ThemeToggle /></nav></details></header>;
 }
 
 function Footer() {
   return <footer className="site-footer">
     <div className="footer-brand">
-      <Link className="logo" href="/"><img className="logo-mark" src="/media/new-icon-dark.png" alt="" /><span>Azzan Khan</span></Link>
+      <Link className="logo" href="/"><img className="logo-mark" src="/media/new-icon-dark.webp" alt="" width="34" height="34" /><span>Azzan Khan</span></Link>
       <p>Lead Engineer building thoughtful, production-ready software.</p>
       <div className="footer-socials" aria-label="Social links">
         <a href="https://www.linkedin.com/in/azzan-khan-871958114/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
@@ -83,7 +82,7 @@ function Footer() {
     </nav>
     <nav className="footer-column" aria-label="Resources">
       <h2>Explore</h2>
-      <Link href="/blog">Writing</Link><Link href="/projects">Projects</Link><Link href="/youtube">YouTube</Link><a href="https://github.com/azzankhan" target="_blank" rel="noreferrer">GitHub</a><a href="https://www.linkedin.com/in/azzan-khan-871958114/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <Link href="/blog">Blog</Link>
     </nav>
     <p className="copyright">© {new Date().getFullYear()} Azzan Khan</p>
   </footer>;
@@ -130,8 +129,8 @@ const featuredWork = [
 
 const whatIBuild = [
   {
-    id: 'full-stack-applications',
-    title: 'Full-stack applications',
+    id: 'applications',
+    title: 'Applications',
     brief: 'Connected interfaces, APIs, and data built around real workflows.',
     summary: 'Dashboards, portals, and internal tools that replace spreadsheets, manual steps, and disconnected systems.',
     who: 'Teams that have outgrown spreadsheets, or need a customer or staff portal.',
@@ -189,7 +188,7 @@ export function Home() {
         <div className="hero-actions"><Link className="button button-dark" href="/work">View my work {arrow}</Link><Link className="text-link" href="/what-i-build">Explore what I build {arrow}</Link></div>
         <div className="hero-status"><span className="status-pulse" />Open to thoughtful collaborations <span>·</span> based in India</div>
       </div>
-      <figure className="hero-portrait"><img src="/media/azzan-portrait.webp" alt="Azzan Khan" /></figure>
+      <figure className="hero-portrait"><img src="/media/azzan-portrait.webp" alt="Azzan Khan" width="1400" height="733" /></figure>
     </section>
     <section className="signal-bar">
       <div><strong>7+</strong><span>years in enterprise engineering</span></div>
@@ -238,7 +237,8 @@ function Blog() {
 }
 
 function Article({ post }: { post: Post }) {
-  return <Shell><article className="article"><Link className="back-link" href="/blog">← Back to writing</Link><header className="article-header"><div className="post-meta"><span>{post.category}</span><span>{post.dateLabel}</span></div><h1>{post.title}</h1><p className="article-excerpt">{post.excerpt}</p></header><img className="article-image" src={post.image.replace('./', '/')} alt={post.title} /><div className="article-layout"><div className="article-content" dangerouslySetInnerHTML={{ __html: post.content }} /><aside><p className="eyebrow">Keep reading</p>{posts.filter((item) => item.slug !== post.slug).slice(0, 2).map((item) => <Link className="related-link" href={`/blog/${item.slug}`} key={item.slug}><strong>{item.title}</strong><span>{item.dateLabel} {arrow}</span></Link>)}</aside></div></article></Shell>;
+  const schema = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: post.title, description: post.excerpt, datePublished: post.dateLabel.replace(/\./g, '-'), image: `https://azzankhan.github.io${post.image.replace('./', '/')}`, author: { '@type': 'Person', name: 'Azzan Khan', url: 'https://azzankhan.github.io' }, mainEntityOfPage: `https://azzankhan.github.io/blog/${post.slug}/` };
+  return <Shell><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /><article className="article"><Link className="back-link" href="/blog">← Back to writing</Link><header className="article-header"><div className="post-meta"><span>{post.category}</span><span>{post.dateLabel}</span></div><h1>{post.title}</h1><p className="article-excerpt">{post.excerpt}</p></header><img className="article-image" src={post.image.replace('./', '/')} alt={post.title} /><div className="article-layout"><div className="article-content" dangerouslySetInnerHTML={{ __html: post.content }} /><aside><p className="eyebrow">Keep reading</p>{posts.filter((item) => item.slug !== post.slug).slice(0, 2).map((item) => <Link className="related-link" href={`/blog/${item.slug}`} key={item.slug}><strong>{item.title}</strong><span>{item.dateLabel} {arrow}</span></Link>)}</aside></div></article></Shell>;
 }
 
 function WorkPage() {
@@ -327,11 +327,12 @@ function WorkPage() {
 }
 
 function WhatIBuildPage() {
-  return <Shell><Intro kicker="Capabilities" title={<>What I <em>build.</em></>} copy="A snapshot of the kinds of engineering work I have experience delivering, from business websites to full-stack platforms, AI integrations, and modernization." /><section className="capability-grid">{whatIBuild.map(({ id, title, summary, who, points }, index) => <article className="capability-card" id={id} key={id}><span className="case-number">0{index + 1}</span><h2>{title}</h2><p className="capability-summary">{summary}</p><p className="capability-who"><strong>Best for:</strong> {who}</p><ul>{points.map((point) => <li key={point}>{point}</li>)}</ul></article>)}</section><section className="cta-section capability-cta"><p className="eyebrow">{dot}Have something in mind?</p><h2>Let&apos;s talk about what<br /><em>you&apos;re building.</em></h2><p className="cta-copy">Whether you have a clear brief or just an early idea, I&apos;d be glad to hear about it and explore how we could work together.</p><Link className="button button-dark" href="/contact">Start a conversation {arrow}</Link></section></Shell>;
+  const schema = { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: whatIBuild.map(({ title, summary }, index) => ({ '@type': 'ListItem', position: index + 1, item: { '@type': 'Service', name: title, description: summary, provider: { '@type': 'Person', name: 'Azzan Khan', url: 'https://azzankhan.github.io' } } })) };
+  return <Shell><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} /><Intro kicker="Capabilities" title={<>What I <em>build.</em></>} copy="A snapshot of the kinds of engineering work I have experience delivering, from business websites to full-stack platforms, AI integrations, and modernization." /><section className="capability-grid">{whatIBuild.map(({ id, title, summary, who, points }, index) => <article className="capability-card" id={id} key={id}><span className="case-number">0{index + 1}</span><h2>{title}</h2><p className="capability-summary">{summary}</p><p className="capability-who"><strong>Best for:</strong> {who}</p><ul>{points.map((point) => <li key={point}>{point}</li>)}</ul></article>)}</section><section className="cta-section capability-cta"><p className="eyebrow">{dot}Have something in mind?</p><h2>Let&apos;s talk about what<br /><em>you&apos;re building.</em></h2><p className="cta-copy">Whether you have a clear brief or just an early idea, I&apos;d be glad to hear about it and explore how we could work together.</p><Link className="button button-dark" href="/contact">Start a conversation {arrow}</Link></section></Shell>;
 }
 
 function ProjectsPage() {
-  return <Shell><Intro kicker="Projects and experiments" title={<>What I&apos;m<br /><em>learning by doing.</em></>} copy="A mix of public work, technical experiments, and small systems that keep my curiosity close to the craft." /><section className="project-notes"><div><p className="eyebrow">Current focus</p><h2>Specification-driven development</h2><p>Defining behaviour, constraints, and acceptance criteria before code — so AI agents execute against intent, not guesses.</p></div><div><p className="eyebrow">Daily practice</p><h2>Coding agents in production</h2><p>Working extensively with Claude agents, custom agent skills, and agentic workflows on the clinical learning platform — with human review on every change.</p></div><div><p className="eyebrow">Side direction</p><h2>Small products, real users</h2><p>Building and learning in public through Garden Public School, technical writing, and experiments that turn ideas into working interfaces.</p></div><div><p className="eyebrow">Always improving</p><h2>Ship, observe, refine</h2><p>The work is not finished at deployment. Feedback, tests, monitoring, and thoughtful iteration are part of the product.</p></div></section></Shell>;
+  return <Shell><Intro kicker="Projects and experiments" title={<>What I&apos;m<br /><em>learning by doing.</em></>} copy="These project notes now live on the About page, alongside the experience and practices that shape the work." /><section className="project-notes project-page-moved"><div><p className="eyebrow">Find them on About</p><h2>Projects, in context.</h2><p>Explore current focus, daily practice, side projects, and how I approach shipping and iteration.</p><Link className="text-link" href="/about#projects">View projects and practice {arrow}</Link></div></section></Shell>;
 }
 
 function StandardPage({ kind }: { kind: string }) {
@@ -343,7 +344,7 @@ function StandardPage({ kind }: { kind: string }) {
   };
   const item = content[kind] ?? content.about;
   if (kind === 'work') return <WorkPage />;
-  if (kind === 'what-i-build' || kind === 'services') return <WhatIBuildPage />;
+  if (kind === 'what-i-build') return <WhatIBuildPage />;
   if (kind === 'projects') return <ProjectsPage />;
   if (kind === 'about') return <Shell>
     <Intro {...item} />
@@ -359,8 +360,19 @@ function StandardPage({ kind }: { kind: string }) {
         <div><span>Recognition</span><strong>Key Contributor Award · 2023<br />Digital Ninja Award · 2021<br /><small>Associated with CitiusTech / Infosys</small></strong></div>
       </div>
     </section>
-    <section className="section"><div className="section-heading"><div><p className="eyebrow">{dot}Capabilities</p><h2>Skills, <em>by what they do.</em></h2></div></div></section>
+    <section className="section capability-heading"><div className="section-heading"><div><p className="eyebrow">{dot}Capabilities</p><h2>Skills, <em>by what they do.</em></h2></div></div></section>
     <section className="skills-grid">{capabilityGroups.map(([number, title, subtitle, skills, extra]) => <article className={`skill-card ${extra}`} key={number}><span className="skill-number">{number}</span><p className="eyebrow">{subtitle}</p><h2>{title}</h2><p className="skill-list">{skills}</p></article>)}</section>
+    <section className="section about-projects" id="projects">
+      <p className="eyebrow">{dot}Focus</p>
+      <h2>What I&apos;m learning<br /><em>by doing.</em></h2>
+      <p className="lead">A mix of public work, technical experiments, and small systems that keep my curiosity close to the craft.</p>
+      <div className="project-notes">
+        <div><p className="eyebrow">Current focus</p><h2>Specification-driven development</h2><p>Defining behaviour, constraints, and acceptance criteria before code — so AI agents execute against intent, not guesses.</p></div>
+        <div><p className="eyebrow">Daily practice</p><h2>Coding agents in production</h2><p>Working extensively with Claude agents, custom agent skills, and agentic workflows on the clinical learning platform — with human review on every change.</p></div>
+        <div><p className="eyebrow">Side direction</p><h2>Small products, real users</h2><p>Building and learning in public through independent web projects, technical writing, and experiments that turn ideas into working interfaces.</p></div>
+        <div><p className="eyebrow">Always improving</p><h2>Ship, observe, refine</h2><p>The work is not finished at deployment. Feedback, tests, monitoring, and thoughtful iteration are part of the product.</p></div>
+      </div>
+    </section>
     <section className="career-section">
       <p className="eyebrow">{dot}Professional journey</p>
       <h2>Experience across<br /><em>high-stakes products.</em></h2>
@@ -383,6 +395,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     return post ? <Article post={post} /> : <StandardPage kind="work" />;
   }
   if (slug[0] === 'blog') return <Blog />;
-  if (!['work', 'what-i-build', 'services', 'projects', 'about', 'contact', 'youtube'].includes(slug[0])) notFound();
+  if (!['work', 'what-i-build', 'projects', 'about', 'contact', 'youtube'].includes(slug[0])) notFound();
   return <StandardPage kind={slug[0]} />;
 }

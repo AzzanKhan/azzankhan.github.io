@@ -6,7 +6,7 @@ const siteUrl = 'https://azzankhan.github.io';
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ['/', '/work/', '/services/', '/about/', '/blog/', '/contact/'].map((path) => ({
+  const pages = ['/', '/work/', '/what-i-build/', '/about/', '/blog/', '/contact/'].map((path) => ({
     url: `${siteUrl}${path}`,
     changeFrequency: 'monthly' as const,
     priority: path === '/' ? 1 : 0.7,

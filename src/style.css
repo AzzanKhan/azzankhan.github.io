@@ -570,7 +570,7 @@ html[data-theme="light"] .post-card:focus-within .post-meta span:first-child{
 }
 .footer-brand .logo-mark{background:var(--lime);color:#101817}
 .logo-mark{width:37px;height:26px;object-fit:contain;border-radius:0;background:none!important;color:transparent!important;font-size:0;letter-spacing:0}
-html[data-theme="light"] .logo-mark{content:url('/media/new-icon-light.png')}
+html[data-theme="light"] .logo-mark{content:url('/media/new-icon-light.webp')}
 .footer-brand .logo-mark{background:none!important;color:transparent!important}
 .footer-brand>p{max-width:360px;color:var(--muted);font-size:14px;margin:18px 0}
 .footer-socials{display:flex;gap:9px;margin-top:24px}
@@ -585,6 +585,7 @@ html[data-theme="light"] .logo-mark{content:url('/media/new-icon-light.png')}
 .footer-socials a[aria-label="YouTube"]{color:#ff0000}
 .footer-socials a:hover{border-color:var(--lime);color:var(--lime);transform:translateY(-2px)}
 .footer-column{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.site-footer>.footer-column{align-self:start}
 .footer-column h2{margin:0 0 7px;color:var(--muted);font:500 10px var(--mono);letter-spacing:.13em;text-transform:uppercase}
 .footer-column a{font-size:13px;color:var(--ink);transition:color .2s}
 .footer-column a:hover{color:var(--lime)}
@@ -595,8 +596,17 @@ html[data-theme="light"] .logo-mark{content:url('/media/new-icon-light.png')}
   padding-top:20px;
   text-align:left
 }
+.about-projects>h2{font-size:clamp(38px,5vw,64px);line-height:1.02;letter-spacing:-.07em;margin:18px 0}
+.about-projects>.lead{margin:0}
+.about-projects .project-notes{max-width:none;margin:38px 0 0;padding:0}
+.project-page-moved{padding-top:0}
 @media(max-width:700px){
   .site-footer{grid-template-columns:1fr 1fr;gap:34px 24px;padding:42px 20px 24px}
   .footer-brand{grid-column:1/-1}
   .site-footer .copyright{grid-column:1/-1}
 }
+
+/* Tighten the Capabilities heading so the skill cards sit directly under it */
+.capability-heading{padding-bottom:48px}
+
+.capability-heading .section-heading{margin-bottom:0}
