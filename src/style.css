@@ -610,3 +610,9 @@ html[data-theme="light"] .logo-mark{content:url('/media/new-icon-light.webp')}
 .capability-heading{padding-bottom:48px}
 
 .capability-heading .section-heading{margin-bottom:0}
+
+/* Footer icon links */
+.footer-icon{display:inline-flex;align-items:center;justify-content:center}
+
+.footer-icon svg{display:block}
+.footer-socials a[aria-label="Instagram"]{color:#e4405f}
