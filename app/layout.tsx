@@ -40,6 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image', title: siteTitle, description: siteDescription, images: ['/media/azzan-portrait.webp'] },
   robots: { index: true, follow: true },
+  verification: { google: 'VelD59-gtCXhiwwtqiUY_bK_kf0LOkbAiWev0GLYSSo' },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
